@@ -36,11 +36,11 @@ If your system has [Go even < 1.7](https://golang.org/dl/) you can pull the code
 
 ```
 # build the cli-streamer program on windows
-git clone https://github.com/jeamon/multistream-commands-executor-with-timeout.git && cd multistream-commands-executor-with-timeout
+git clone https://github.com/jeamon/cli-streamer.git && cd cli-streamer
 go build -o cli-streamer.exe cli-streamer.go
 
 # build the cli-streamer program on linux and others
-git clone https://github.com/jeamon/multistream-commands-executor-with-timeout.git && cd multistream-commands-executor-with-timeout
+git clone https://github.com/jeamon/cli-streamer.git && cd cli-streamer
 go build -o cli-streamer cli-streamer.go
 ```
 
@@ -103,4 +103,4 @@ Pull requests are welcome. However, I would be glad to be contacted for discussi
 
 ## License
 
-please check & read [the license details](https://github.com/jeamon/multistream-commands-executor-with-timeout/blob/master/LICENSE) or [reach out to me](https://blog.cloudmentor-scale.com/contact) before any action.
+please check & read [the license details](https://github.com/jeamon/cli-streamer/blob/master/LICENSE) or [reach out to me](https://blog.cloudmentor-scale.com/contact) before any action.

@@ -1,3 +1,3 @@
-module github.com/jeamon/multistream-commands-executor-with-timeout
+module github.com/jeamon/cli-streamer
 
 go 1.13
