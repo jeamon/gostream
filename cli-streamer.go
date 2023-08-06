@@ -72,7 +72,8 @@ func executor(cmd *exec.Cmd, timeout time.Duration, quit <-chan struct{}) {
 	}
 }
 
-func formatSyntax(cmd *exec.Cmd, task string) *exec.Cmd {
+func formatSyntax(task string) *exec.Cmd {
+	var cmd *exec.Cmd
 	// command syntax for windows platform.
 	if runtime.GOOS == "windows" {
 		cmd = exec.Command("cmd", "/C", task)
@@ -95,15 +96,14 @@ func handlesignal(exit chan<- struct{}) {
 	// one signal to be handled.
 	sigch := make(chan os.Signal, 1)
 	// setup supported exit signals.
-	signal.Notify(sigch, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL,
-		syscall.SIGTERM, syscall.SIGHUP, os.Interrupt, os.Kill)
+	signal.Notify(sigch, syscall.SIGINT, syscall.SIGQUIT,
+		syscall.SIGTERM, syscall.SIGHUP, os.Interrupt)
 
 	// block until something comes in.
 	<-sigch
 	signal.Stop(sigch)
 	// then notify executor to stop.
 	exit <- struct{}{}
-	return
 }
 
 func main() {
@@ -141,10 +141,9 @@ func main() {
 		return
 	}
 
-	//command to execute provide so format syntax based on platform.
-	var cmd *exec.Cmd
-	// could be used as demo - task := "netstat -n 2"
-	cmd = formatSyntax(cmd, *taskPtr)
+	// command to execute provided so format syntax based on platform.
+	// we can use as demo the task "netstat -n 2"
+	cmd := formatSyntax(*taskPtr)
 
 	// 0 or negative value provided - reset to 1hr = 3600 secs.
 	if *timeoutPtr <= 0 {
@@ -246,6 +245,6 @@ Examples:
 	$ cli-streamer version
 	$ cli-streamer --help
     $ cli-streamer -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
-    $ cli-streamer -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt --console"
+    $ cli-streamer -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
     $ cli-streamer -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
     $ cli-streamer -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"`
