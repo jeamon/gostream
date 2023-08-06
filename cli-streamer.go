@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"io"
@@ -31,7 +30,7 @@ func executor(cmd *exec.Cmd, timeout time.Duration, quit <-chan struct{}) {
 		log.Printf("failed to start the task - errmsg : %v", err)
 		return
 	}
-	log.Printf("task execution successfully started under process id [%d]\n", cmd.Process.Pid)
+	log.Printf("task started under process id [%d]\n", cmd.Process.Pid)
 	// goroutine to handle the blocking behavior of wait func - channel used to notify.
 	done := make(chan error)
 	go func() {
@@ -152,8 +151,9 @@ func main() {
 
 	// build the multi destinations io writer.
 	// by default we stream in memory buffer the combined output.
-	resultbuffer := &bytes.Buffer{}
-	outWriters := []io.Writer{resultbuffer}
+	// resultbuffer := &bytes.Buffer{}
+	// outWriters := []io.Writer{resultbuffer}
+	outWriters := []io.Writer{}
 
 	if *consolePtr {
 		// user wants output being displayed at terminal.
@@ -189,6 +189,11 @@ func main() {
 		}
 	}
 
+	// use standard console output if no output specified.
+	if len(outWriters) == 0 {
+		outWriters = append(outWriters, os.Stdout)
+	}
+
 	// to display on console add also os.Stdout.
 	// create the final multi-destination writer.
 	outWr := io.MultiWriter(outWriters...)
@@ -206,7 +211,7 @@ func main() {
 	executor(cmd, timeout, quit)
 
 	// lets reset the memory buffer and use built-in feature.
-	resultbuffer.Reset()
+	// resultbuffer.Reset()
 }
 
 const version = "This tool is <cli-streamer> • version 1.0 By Jerome AMON"
