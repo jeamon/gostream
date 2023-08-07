@@ -17,6 +17,7 @@ Options:
     -files     Specify all filenames to stream the output of the execution.
     -save      If present then execution output must also be saved in daily file.
     -console   If present then execution output will also be displayed on terminal.
+    -tasksFile Load commands from the provided file (see "example.file" content).
     
 
 Arguments:
@@ -33,9 +34,17 @@ In the meantime please see below examples for current version 1.0 :
 
 
 Examples:
-	$ cli-streamer version
-	$ cli-streamer --help
+
+    $ cli-streamer version
+    $ cli-streamer --help
+    
+    Option: single command execution
+    
     $ cli-streamer -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
     $ cli-streamer -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
     $ cli-streamer -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
-    $ cli-streamer -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"`
+    $ cli-streamer -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
+
+    Option: multiple commands from file
+    
+    $ cli-streamer -tasksFile "tasks.txt"`

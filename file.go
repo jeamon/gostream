@@ -28,9 +28,9 @@ func DispatchTasks(filename string, tasksQueue chan<- *Task) {
 		taskStr = scanner.Text()
 		taskPtr, err := ParseTaskJson(taskStr)
 		if err != nil {
-			log.Printf("failed: %s", taskStr)
+			log.Printf("[failed ] %s", taskStr)
 		} else {
-			log.Printf("loaded: %s", taskStr)
+			log.Printf("[loaded ] %s", taskStr)
 		}
 
 		tasksQueue <- taskPtr
@@ -53,6 +53,7 @@ func ParseTaskJson(data string) (*Task, error) {
 
 // Worker consumes available tasks from the queue and execute them.
 func TaskWorker(id int, wg *sync.WaitGroup, quit <-chan struct{}, tasksQueue <-chan *Task) {
+	defer wg.Done()
 	for task := range tasksQueue {
 		out, err := task.IOWriter()
 		if err != nil {
@@ -62,11 +63,11 @@ func TaskWorker(id int, wg *sync.WaitGroup, quit <-chan struct{}, tasksQueue <-c
 		cmd := task.ToExecCommand(out)
 		task.Execute(cmd, quit)
 	}
-	wg.Done()
 }
 
 func PreBootTaskWorkers(max int, wg *sync.WaitGroup, quit <-chan struct{}, tasksQueue <-chan *Task) {
 	for i := 0; i < max; i++ {
+		wg.Add(1)
 		id := i
 		go TaskWorker(id, wg, quit, tasksQueue)
 	}
@@ -75,10 +76,12 @@ func PreBootTaskWorkers(max int, wg *sync.WaitGroup, quit <-chan struct{}, tasks
 func ProcessTasksFile(filename string, quit <-chan struct{}) {
 	wg := &sync.WaitGroup{}
 	cores := runtime.NumCPU()
-	// assuming 2 threads per core and one used by main.
+	runtime.GOMAXPROCS(cores)
+	// assuming 2 threads per core and relaxing one for the main.
 	maxWorkers := (cores * 2) - 1
 	tasksQueue := make(chan *Task, maxWorkers)
 	PreBootTaskWorkers(maxWorkers, wg, quit, tasksQueue)
 	DispatchTasks(filename, tasksQueue)
+	close(tasksQueue)
 	wg.Wait()
 }

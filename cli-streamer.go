@@ -43,6 +43,8 @@ func main() {
 	// declare the boolean flag save. if mentioned save stream output to daily file.
 	consolePtr := flag.Bool("console", false, "specify if wanted to stream as well output to console")
 
+	tasksFilePtr := flag.String("tasksFile", "", "define a file where to load all commands details")
+
 	// check for any valid subcommands : version or help
 	if len(os.Args) == 2 {
 		if os.Args[1] == "version" || os.Args[1] == "--version" || os.Args[1] == "-v" {
@@ -57,8 +59,8 @@ func main() {
 	// move on for flag processing.
 	flag.Parse()
 
-	if *taskPtr == "" {
-		// no command provided - abort.
+	if len(*taskPtr) != 0 && len(*tasksFilePtr) != 0 {
+		// cannot define single task and others tasks from file.
 		flag.Usage()
 		return
 	}
@@ -67,5 +69,17 @@ func main() {
 	quit := make(chan struct{}, 1)
 	go handlesignal(quit)
 
-	ProcessSingleTask(quit, taskPtr, filesPtr, timeoutPtr, savePtr, consolePtr)
+	// ption: single task with its details.
+	if *taskPtr != "" {
+		ProcessSingleTask(quit, taskPtr, filesPtr, timeoutPtr, savePtr, consolePtr)
+		return
+	}
+	// option: load tasks from file.
+	if *tasksFilePtr != "" {
+		ProcessTasksFile(*tasksFilePtr, quit)
+		return
+	}
+
+	// no valid option.
+	flag.Usage()
 }

@@ -87,7 +87,7 @@ func (task *Task) Execute(cmd *exec.Cmd, quit <-chan struct{}) {
 		return
 	}
 	pid := cmd.Process.Pid
-	log.Printf("[started] [pid:%d] task: %q\n", pid, task.Task)
+	log.Printf("[started] [pid:%05d] task: %q\n", pid, task.Task)
 	// goroutine to handle the blocking behavior of wait func - channel used to notify.
 	done := make(chan error)
 	go func() {
