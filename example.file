@@ -1,0 +1,3 @@
+{"task":"ls -la", "timeout":15, "files":["lsla.txt", "lsla.log"], "save":true,"console":true, "web":true}
+{"task":"ls -lh", "timeout":15, "files":["lslh.txt", "lslh.log"], "save":true, "console":true, "web":true}
+{"task":"ping 127.0.0.1", "timeout":15, "files": ["ping.txt", "ping.log"], "save":true, "console":true, "web":true}
