@@ -103,19 +103,18 @@ func (task *Task) Execute(cmd *exec.Cmd, quit <-chan struct{}) {
 	// start the timer and keep watching until expired.
 	case <-time.After(time.Duration(task.Timeout) * time.Second):
 		// timeout reached - so try to kill the job process.
-		log.Printf("task execution timed out after %d - killing the process id [%d]\n", task.Timeout, pid)
+		log.Printf("[timeout] [pid:%05d] task: %q timeout: %d\n", pid, task.Task, task.Timeout)
 		// kill the process and exit from this function.
 		if err = cmd.Process.Kill(); err != nil {
-			log.Printf("task execution timeout reached - failed to kill process id [%d] - errmsg: %v\n", pid, err)
-		} else {
-			log.Printf("task execution timeout reached - succeeded to kill process id [%d]\n", pid)
+			log.Printf("[timeout] [pid:%05d] task: %q timeout: %d error: %s\n", pid, task.Task, task.Timeout, err.Error())
 		}
-
 		return
 	case err = <-done:
 		// task execution completed [cmd.wait func] - check if for error.
 		if err != nil {
-			fmt.Printf("task completed with failure - errmsg : %v", err)
+			log.Printf("[failed ] [pid:%05d] task: %q error: %s\n", pid, task.Task, err.Error())
+		} else {
+			log.Printf("[success] [pid:%05d] task: %q\n", pid, task.Task)
 		}
 		return
 		// if needed to dump the buffer content to console
