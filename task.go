@@ -11,12 +11,12 @@ import (
 )
 
 type Task struct {
-	Task    string   `json:"task"`
-	Timeout int      `json:"timeout"`
-	Files   []string `json:"files"`
-	Save    bool     `json:"save"`
-	Console bool     `json:"console"`
-	Web     bool     `json:"web"`
+	Task    string   `json:"task" yaml:"task" toml:"task"`
+	Timeout int      `json:"timeout" yaml:"timeout" toml:"timeout"`
+	Files   []string `json:"files" yaml:"files" toml:"files"`
+	Save    bool     `json:"save" yaml:"save" toml:"save"`
+	Console bool     `json:"console" yaml:"console" toml:"console"`
+	Web     bool     `json:"web" yaml:"web" toml:"web"`
 }
 
 func (task *Task) ToExecCommand(out io.Writer) *exec.Cmd {
