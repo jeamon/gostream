@@ -7,8 +7,13 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"sync"
 	"time"
 )
+
+type Tasks struct {
+	Tasks []Task `json:"tasks" yaml:"tasks" toml:"tasks"`
+}
 
 type Task struct {
 	Task    string   `json:"task" yaml:"task" toml:"task"`
@@ -124,5 +129,28 @@ func (task *Task) Execute(cmd *exec.Cmd, quit <-chan struct{}) {
 		// fmt.Printf(string(data))
 		// cmdstdout.Close()
 		// or inside main func - acheive the same with fmt.Println(result.String())
+	}
+}
+
+// Worker consumes available tasks from the queue and execute them.
+func TaskWorker(id int, wg *sync.WaitGroup, quit <-chan struct{}, tasksQueue <-chan *Task) {
+	defer wg.Done()
+	for task := range tasksQueue {
+		out, err := task.IOWriter()
+		if err != nil {
+			log.Printf("failed to build task output stream: %v\n", err)
+			continue
+		}
+		cmd := task.ToExecCommand(out)
+		task.Execute(cmd, quit)
+	}
+}
+
+// PreBootTaskWorkers spins up all workers ready to consume tasks from queue.
+func PreBootTaskWorkers(max int, wg *sync.WaitGroup, quit <-chan struct{}, tasksQueue <-chan *Task) {
+	for i := 0; i < max; i++ {
+		wg.Add(1)
+		id := i
+		go TaskWorker(id, wg, quit, tasksQueue)
 	}
 }

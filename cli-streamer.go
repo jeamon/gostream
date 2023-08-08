@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
 )
 
@@ -29,7 +30,9 @@ func handlesignal(exit chan<- struct{}) {
 }
 
 func main() {
-
+	// enforce usage of all cores means number of
+	// active os threads simultaneously.
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	// will be triggered to display usage instructions.
 	flag.Usage = func() { fmt.Fprintf(os.Stderr, "%s\n", usage) }
 
@@ -44,6 +47,7 @@ func main() {
 	consolePtr := flag.Bool("console", false, "specify if wanted to stream as well output to console")
 
 	tasksFilePtr := flag.String("tasksFile", "", "define a file where to load all commands details")
+	tasksJsonPtr := flag.String("tasksJson", "", "define a json file where to load all commands details")
 
 	// check for any valid subcommands : version or help
 	if len(os.Args) == 2 {
@@ -59,8 +63,8 @@ func main() {
 	// move on for flag processing.
 	flag.Parse()
 
-	if len(*taskPtr) != 0 && len(*tasksFilePtr) != 0 {
-		// cannot define single task and others tasks from file.
+	if len(*taskPtr) != 0 && len(*tasksFilePtr) != 0 && len(*tasksJsonPtr) != 0 {
+		// must use one option.
 		flag.Usage()
 		return
 	}
@@ -77,6 +81,12 @@ func main() {
 	// option: load tasks from file.
 	if *tasksFilePtr != "" {
 		ProcessTasksFile(*tasksFilePtr, quit)
+		return
+	}
+
+	// option: load tasks from json-encoded file.
+	if *tasksJsonPtr != "" {
+		ProcessTasksJson(*tasksJsonPtr, quit)
 		return
 	}
 
