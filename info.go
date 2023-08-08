@@ -18,6 +18,8 @@ Options:
     -save      If present then execution output must also be saved in daily file.
     -console   If present then execution output will also be displayed on terminal.
     -tasksFile Load commands from the provided file (see "example.file" content).
+    -tasksJson Load commands from the provided json file (see "example.json" content).
+    -tasksToml Load commands from the provided toml file (see "example.toml" content).
     
 
 Arguments:
@@ -47,4 +49,12 @@ Examples:
 
     Option: multiple commands from file
     
-    $ cli-streamer -tasksFile "tasks.txt"`
+    $ cli-streamer -tasksFile "tasks.txt"
+
+    Option: multiple commands from json file
+    
+    $ cli-streamer -tasksJson "tasks.txt"
+
+    Option: multiple commands from toml file
+    
+    $ cli-streamer -tasksToml "tasks.txt"`
