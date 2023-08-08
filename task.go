@@ -24,6 +24,7 @@ type Task struct {
 	Web     bool     `json:"web" yaml:"web" toml:"web"`
 }
 
+// ToExecCommand turns a task into a ready to run exec/command.
 func (task *Task) ToExecCommand(out io.Writer) *exec.Cmd {
 	var cmd *exec.Cmd
 	// command syntax for windows platform.

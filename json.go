@@ -9,6 +9,8 @@ import (
 	"sync"
 )
 
+// contains routines to execute set of tasks defined into a json-encoded file like described in `example.json`.
+
 // DispatchTasksJson processes a json file containing a set of tasks
 // and send them to the worker input queue for execution.
 func DispatchTasksJson(filename string, tasksQueue chan<- *Task) {
