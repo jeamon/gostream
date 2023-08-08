@@ -48,6 +48,7 @@ func main() {
 
 	tasksFilePtr := flag.String("tasksFile", "", "define a file where to load all commands details")
 	tasksJsonPtr := flag.String("tasksJson", "", "define a json file where to load all commands details")
+	tasksTomlPtr := flag.String("tasksToml", "", "define a toml file where to load all commands details")
 
 	// check for any valid subcommands : version or help
 	if len(os.Args) == 2 {
@@ -63,7 +64,8 @@ func main() {
 	// move on for flag processing.
 	flag.Parse()
 
-	if len(*taskPtr) != 0 && len(*tasksFilePtr) != 0 && len(*tasksJsonPtr) != 0 {
+	if len(*taskPtr) != 0 && len(*tasksFilePtr) != 0 &&
+		len(*tasksJsonPtr) != 0 && len(*tasksTomlPtr) != 0 {
 		// must use one option.
 		flag.Usage()
 		return
@@ -87,6 +89,12 @@ func main() {
 	// option: load tasks from json-encoded file.
 	if *tasksJsonPtr != "" {
 		ProcessTasksJson(*tasksJsonPtr, quit)
+		return
+	}
+
+	// option: load tasks from toml-encoded file.
+	if *tasksTomlPtr != "" {
+		ProcessTasksToml(*tasksTomlPtr, quit)
 		return
 	}
 
