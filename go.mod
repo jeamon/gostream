@@ -1,3 +1,5 @@
 module github.com/jeamon/cli-streamer
 
 go 1.13
+
+require github.com/pelletier/go-toml v1.9.5
