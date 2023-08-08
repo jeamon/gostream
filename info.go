@@ -20,6 +20,7 @@ Options:
     -tasksFile Load commands from the provided file (see "example.file" content).
     -tasksJson Load commands from the provided json file (see "example.json" content).
     -tasksToml Load commands from the provided toml file (see "example.toml" content).
+    -tasksYaml Load commands from the provided yaml file (see "example.yaml" content).
     
 
 Arguments:
@@ -57,4 +58,8 @@ Examples:
 
     Option: multiple commands from toml file
     
-    $ cli-streamer -tasksToml "tasks.txt"`
+    $ cli-streamer -tasksToml "tasks.txt"
+
+    Option: multiple commands from yaml file
+    
+    $ cli-streamer -tasksYaml "tasks.txt"`
