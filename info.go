@@ -1,10 +1,10 @@
 package main
 
-const version = "This tool is <cli-streamer> • version 1.0 By Jerome AMON"
+const version = "This tool is <gostream> • version 1.0 By Jerome AMON"
 
 const usage = `Usage:
     
-    cli-streamer [-task <quoted-command-to-execute>] [-timeout <execution-deadline-in-seconds>] [-files <filenames-to-stream-output>] [-save] [-console]
+    gostream [-task <quoted-command-to-execute>] [-timeout <execution-deadline-in-seconds>] [-files <filenames-to-stream-output>] [-save] [-console]
 
 Subcommands:
     version    Display the current version of this tool.
@@ -38,28 +38,28 @@ In the meantime please see below examples for current version 1.0 :
 
 Examples:
 
-    $ cli-streamer version
-    $ cli-streamer --help
+    $ gostream version
+    $ gostream --help
     
     Option: single command execution
     
-    $ cli-streamer -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
-    $ cli-streamer -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
-    $ cli-streamer -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
-    $ cli-streamer -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
+    $ gostream -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
+    $ gostream -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
+    $ gostream -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
+    $ gostream -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
 
     Option: multiple commands from file
     
-    $ cli-streamer -tasksFile "tasks.txt"
+    $ gostream -tasksFile "tasks.txt"
 
     Option: multiple commands from json file
     
-    $ cli-streamer -tasksJson "tasks.txt"
+    $ gostream -tasksJson "tasks.txt"
 
     Option: multiple commands from toml file
     
-    $ cli-streamer -tasksToml "tasks.txt"
+    $ gostream -tasksToml "tasks.txt"
 
     Option: multiple commands from yaml file
     
-    $ cli-streamer -tasksYaml "tasks.txt"`
+    $ gostream -tasksYaml "tasks.txt"`

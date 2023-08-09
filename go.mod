@@ -1,4 +1,4 @@
-module github.com/jeamon/cli-streamer
+module github.com/jeamon/gostream
 
 go 1.13
 

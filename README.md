@@ -1,6 +1,6 @@
-# cli-streamer
+# gostream
 
-Simple & light Go-based cross-platform tool to execute commands from shell and from different types (json, yaml, toml etc) of files with the capabilities of multi-streaming the output to multiple destinations files including the standard console with the posibility of adding an execution timeout value for each command. 
+Simple & light Go-based cross-platform tool to execute commands from shell and from different types (json, yaml, toml etc) of files with the capabilities of multi-streaming each output to multiple & different destinations files including the standard console with the option to define an execution timeout value for each command. 
 
 
 
@@ -34,13 +34,13 @@ On Windows, Linux macOS, and FreeBSD you will be able to download the pre-built 
 If your system has [Go even < 1.7](https://golang.org/dl/) you can pull the codebase and build from the source.
 
 ```
-# build the cli-streamer program on windows
-git clone https://github.com/jeamon/cli-streamer.git && cd cli-streamer
-go build -o cli-streamer.exe cli-streamer.go
+# build the gostream program on windows
+git clone https://github.com/jeamon/gostream.git && cd gostream
+go build -o gostream.exe gostream.go
 
-# build the cli-streamer program on linux and others
-git clone https://github.com/jeamon/cli-streamer.git && cd cli-streamer
-go build -o cli-streamer cli-streamer.go
+# build the gostream program on linux and others
+git clone https://github.com/jeamon/gostream.git && cd gostream
+go build -o gostream gostream.go
 ```
 
 
@@ -49,7 +49,7 @@ go build -o cli-streamer cli-streamer.go
 
 ```Usage:
     
-cli-streamer [-task <quoted-command-to-execute>] [-timeout <execution-deadline-in-seconds>] [-files <filenames-to-stream-output>] [-save] [-console]
+gostream [-task <quoted-command-to-execute>] [-timeout <execution-deadline-in-seconds>] [-files <filenames-to-stream-output>] [-save] [-console]
 
 Subcommands:
     version    Display the current version of this tool.
@@ -85,26 +85,26 @@ Examples:
 
     Option: single command execution
     
-    $ cli-streamer -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
-    $ cli-streamer -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
-    $ cli-streamer -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
-    $ cli-streamer -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
+    $ gostream -task "netstat -n 2 | findstr ESTAB" -timeout 180 -files "a.txt b.txt" -save
+    $ gostream -task "ping 127.0.0.1 -t" -timeout 3600 -files "ping.txt" --console
+    $ gostream -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
+    $ gostream -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
 
     Option: multiple commands from file
     
-    $ cli-streamer -tasksFile "tasks.txt"
+    $ gostream -tasksFile "tasks.txt"
 
     Option: multiple commands from json file
     
-    $ cli-streamer -tasksJson "tasks.txt"
+    $ gostream -tasksJson "tasks.txt"
 
     Option: multiple commands from toml file
     
-    $ cli-streamer -tasksToml "tasks.txt"
+    $ gostream -tasksToml "tasks.txt"
 
     Option: multiple commands from yaml file
     
-    $ cli-streamer -tasksYaml "tasks.txt"
+    $ gostream -tasksYaml "tasks.txt"
 	
 ```
 
@@ -125,4 +125,4 @@ Pull requests are welcome. However, I would be glad to be contacted for discussi
 
 ## License
 
-please check & read [the license details](https://github.com/jeamon/cli-streamer/blob/master/LICENSE) or [reach out to me](https://blog.cloudmentor-scale.com/contact) before any action.
+please check & read [the license details](https://github.com/jeamon/gostream/blob/master/LICENSE) or [reach out to me](https://blog.cloudmentor-scale.com/contact) before any action.
