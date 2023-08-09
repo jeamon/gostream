@@ -55,10 +55,10 @@ Option: define single task from shell
 
 Option: define multiple tasks from files
 
-    gostream [-taskFile <xfile> <zfile> <morefiles>]
-    gostream [-taskJson <xfile.json> <zfile.json> <more.json>]
-    gostream [-taskYaml <xfile.yaml> <zfile.yaml> <more.yaml>]
-    gostream [-taskToml <xfile.toml> <zfile.toml> <more.toml>]
+    gostream [-taskFile "xfile zfile morefiles"]
+    gostream [-taskJson "xfile.json zfile.json more.json"]
+    gostream [-taskYaml "xfile.yaml zfile.yaml more.yaml"]
+    gostream [-taskToml "xfile.toml zfile.toml more.toml"]
 
 Subcommands:
     version    Display the current version of this tool.
@@ -100,21 +100,21 @@ Examples:
     $ gostream -task "journalctl -f | grep <xx>" -timeout 120 -files "proclog.txt" --save
     $ gostream -task "tail -f /var/log/syslog" -timeout 3600 -files "syslog.txt"
 
-    Option: multiple commands from file
+    Option: multiple commands from file(s)
     
-    $ gostream -tasksFile "tasks.txt"
+    $ gostream -tasksFile "tasks.txt others.file"
 
-    Option: multiple commands from json file
+    Option: multiple commands from json file(s)
     
-    $ gostream -tasksJson "tasks.txt"
+    $ gostream -tasksJson "tasks.json more.json"
 
-    Option: multiple commands from toml file
+    Option: multiple commands from toml file(s)
     
-    $ gostream -tasksToml "tasks.txt"
+    $ gostream -tasksToml "tasks.toml others.toml"
 
-    Option: multiple commands from yaml file
+    Option: multiple commands from yaml file(s)
     
-    $ gostream -tasksYaml "tasks.txt"
+    $ gostream -tasksYaml "tasks.yaml more.yaml"
 	
 ```
 

@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
+	"strings"
 	"syscall"
 )
 
@@ -83,25 +84,29 @@ func main() {
 	}
 	// option: load tasks from file.
 	if *tasksFilePtr != "" {
-		ProcessTasksFile(*tasksFilePtr, quit)
+		filenames := strings.Fields(*tasksFilePtr)
+		ProcessTasksFile(&filenames, quit)
 		return
 	}
 
 	// option: load tasks from json-encoded file.
 	if *tasksJsonPtr != "" {
-		ProcessTasksJson(*tasksJsonPtr, quit)
+		filenames := strings.Fields(*tasksJsonPtr)
+		ProcessTasksJson(&filenames, quit)
 		return
 	}
 
 	// option: load tasks from toml-encoded file.
 	if *tasksTomlPtr != "" {
-		ProcessTasksToml(*tasksTomlPtr, quit)
+		filenames := strings.Fields(*tasksTomlPtr)
+		ProcessTasksToml(&filenames, quit)
 		return
 	}
 
 	// option: load tasks from yaml-encoded file.
 	if *tasksYamlPtr != "" {
-		ProcessTasksYaml(*tasksYamlPtr, quit)
+		filenames := strings.Fields(*tasksYamlPtr)
+		ProcessTasksYaml(&filenames, quit)
 		return
 	}
 
