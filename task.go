@@ -58,7 +58,7 @@ func (task *Task) IOWriter() (io.Writer, error) {
 	// open or create the day file to stream output of the task execution - default to nil.
 	if task.Save {
 		now := time.Now()
-		dailyFile, err := os.OpenFile(fmt.Sprintf("outputs-%d%02d%02d.txt", now.Year(), now.Month(), now.Day()), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o666)
+		dailyFile, err := os.OpenFile(fmt.Sprintf("outputs.%d%02d%02d.txt", now.Year(), now.Month(), now.Day()), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o666)
 		if err != nil {
 			log.Printf("failed to create or open daily saving file for the task - errmsg : %v", err)
 			return nil, err

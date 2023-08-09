@@ -4,7 +4,16 @@ const version = "This tool is <gostream> • version 1.0 By Jerome AMON"
 
 const usage = `Usage:
     
+Option: define single task from shell
+
     gostream [-task <quoted-command-to-execute>] [-timeout <execution-deadline-in-seconds>] [-files <filenames-to-stream-output>] [-save] [-console]
+
+Option: define multiple tasks from files
+
+    gostream [-taskFile <xfile> <zfile> <morefiles>]
+    gostream [-taskJson <xfile.json> <zfile.json> <more.json>]
+    gostream [-taskYaml <xfile.yaml> <zfile.yaml> <more.yaml>]
+    gostream [-taskToml <xfile.toml> <zfile.toml> <more.toml>]
 
 Subcommands:
     version    Display the current version of this tool.
@@ -28,12 +37,13 @@ Arguments:
     execution-deadline-in-seconds  number of seconds to have the task running.
     filenames-to-stream-output     space separed filenames where to stream output.
 
-You have to provide at least one mandatory argument value [-task]. The list of files
-where to have the output duplicated (in real-time) must be in one word and space
-separed. To have the output be saved into a daily file named outputs-<year><month><day>,
-just add -save flag when launching the program. Upcoming version will add capabilities
-to mention multiple tasks and each task with its own destinations output filenames.
-In the meantime please see below examples for current version 1.0 :
+    Using the shell option, you must provide at least one mandatory argument value [-task].
+    The list of files to stream the output must be in one word and space separed. To have
+    the output be saved into a daily filename pattern outputs.<year><month><day>,
+    just add -save flag when launching the program. Use options which support filenames
+    input if needed to run multiple tasks in parallel. Upcoming version will add capabilities
+    to mention multiple tasks (with its their own attributes) from the shell.
+    In the meantime please see below examples for current version 1.0 :
 
 
 Examples:
