@@ -124,8 +124,7 @@ Examples:
 * add capabilities to specify mutiple commands (each with its own options) from the shell.
 * add capabilities to specify interval at which we want to view output on the terminal and for which command.
 * add capabilities to pause & restart or stop output display at console screen.
-* add capabilities to specify multiple files containing a list of task to execute.
-* add capabilities to specify if wanted to add file to a daily folder to current folder.
+* add capabilities to specify multiple files into `HCL` format containing a list of tasks to execute.
 
 
 ## Contribution
