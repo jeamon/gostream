@@ -47,10 +47,10 @@ func main() {
 	// declare the boolean flag save. if mentioned save stream output to daily file.
 	consolePtr := flag.Bool("console", false, "specify if wanted to stream as well output to console")
 
-	tasksFilePtr := flag.String("tasksFile", "", "define a file where to load all commands details")
-	tasksJsonPtr := flag.String("tasksJson", "", "define a json file where to load all commands details")
-	tasksTomlPtr := flag.String("tasksToml", "", "define a toml file where to load all commands details")
-	tasksYamlPtr := flag.String("tasksYaml", "", "define a yaml file where to load all commands details")
+	tasksFilePtr := flag.String("tasksFile", "", "define one or more file(s) where to load all commands details")
+	tasksJsonPtr := flag.String("tasksJson", "", "define one or more json file(s) where to load all commands details")
+	tasksTomlPtr := flag.String("tasksToml", "", "define one or more toml file(s) where to load all commands details")
+	tasksYamlPtr := flag.String("tasksYaml", "", "define one or more yaml file(s) where to load all commands details")
 
 	// check for any valid subcommands : version or help
 	if len(os.Args) == 2 {
