@@ -9,3 +9,6 @@
 
 # Ignore any upcoming feature which deals with env file
 .env
+
+# TODO list
+TODO
