@@ -1,12 +1,11 @@
 # gostream
 
-Simple & light Go-based cross-platform tool to execute commands from shell and from different types (json, yaml, toml etc) of files with the capabilities of multi-streaming each output to multiple & different destinations files including the standard console with the option to define an execution timeout value for each command. 
+Simple & light Go-based cross-platform tool to execute commands from shell and from different types (json, yaml, toml) of files with the capabilities of multi-streaming each output to multiple & different destinations files including the standard console with the option to define an execution timeout value for each command.
 
 
 
 ## Table of contents
 * [Description](#description)
-* [Technologies](#technologies)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Upcomings](#upcomings)
@@ -18,14 +17,6 @@ Simple & light Go-based cross-platform tool to execute commands from shell and f
 
 Very simple. Please have a look at the [usage section](#usage) for examples.
 This tool can be integrated into an automated script for more capabilities.
-
-
-
-## Technologies
-
-This project is developed with:
-* Golang version: 1.13
-* Native libraries only
 
 
 ## Setup
@@ -121,10 +112,10 @@ Examples:
 
 ## Upcomings
 
-* add capabilities to specify mutiple commands (each with its own options) from the shell.
-* add capabilities to specify interval at which we want to view output on the terminal and for which command.
-* add capabilities to pause & restart or stop output display at console screen.
-* add capabilities to specify multiple files into `HCL` format containing a list of tasks to execute.
+* add capabilities to load mutiple commands fully defined from env variables.
+* add capabilities to specify outputs display interval and for which commands.
+* add capabilities to uniquely color each command outputs when displayed.
+* add capabilities to pause & restart or stop output display on the terminal.
 
 
 ## Contribution
