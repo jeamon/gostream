@@ -9,7 +9,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// contains routines to execute set of tasks defined into yaml-encoded files like described in `example.yaml`.
+// contains routines to execute set of tasks defined into yaml-encoded files like described in `examples/example.yaml`.
 
 // DispatchTasksYaml processes yaml files containing a set of tasks
 // and send them to the worker input queue for execution.

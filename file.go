@@ -9,7 +9,7 @@ import (
 	"sync"
 )
 
-// contains routines to execute set of tasks containing into files like described in `example.file`.
+// contains routines to execute set of tasks containing into files like described in `examples/example.file`.
 // the pattern consists of having each task presented as a json object at each line into each file.
 
 // DispatchTasksFile processes files containing a set of tasks

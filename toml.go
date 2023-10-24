@@ -10,7 +10,7 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-// contains routines to execute set of tasks defined into toml-encoded files like described in `example.toml`.
+// contains routines to execute set of tasks defined into toml-encoded files like described in `examples/example.toml`.
 
 // DispatchTasksToml processes toml files containing a set of tasks
 // and send them to the worker input queue for execution.

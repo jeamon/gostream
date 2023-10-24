@@ -9,7 +9,7 @@ import (
 	"sync"
 )
 
-// contains routines to execute set of tasks defined into json-encoded files like described in `example.json`.
+// contains routines to execute set of tasks defined into json-encoded files like described in `examples/example.json`.
 
 // DispatchTasksJson processes json files containing a set of tasks
 // and send them to the worker input queue for execution.
